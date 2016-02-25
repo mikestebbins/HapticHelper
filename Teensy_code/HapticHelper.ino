@@ -11,30 +11,35 @@ TODO's:
 - update diagram of board and hookups
 - 
 
-----------------------------Arduino Pin Assignments -------------------------------------
-                   	                 ____
-                            _           |    |
-                         .-| |----------|    |----.
-                         | | |  Arduino Uno  |    |
-                         |  -            ----     |
-                         |                   Gnd []
-                         |                   D13 []
-                  -   +  |                   D12 []
-EZ-Link BT Vin  --|1uF|--[] Reset            D11 []
-                         [] 3.3v             D10 []
-       EZ-Link BT Vin    [] 5V                D9 []
-       EZ-Link BT Ground [] Gnd               D8 []
-                         [] Gnd                   |
-                         [] Vin               D7 []
-                         |                    D6 []
-                         [] A0                D5 []
-                         [] A1                D4 []
-                         [] A2                D3 []
-                         [] A3                D2 []
-                         [] A4            tx  D1 [] EZ-Link BT Rx
-                         [] A5            rx  D0 [] EZ-Link BT Tx
-    			               L                   ____|
-                           \_________________/      
+---------------------------- Pin Assignments -------------------------------------
+                          
+                          Teensy 3.1 / 3.2
+                                  |      |
+                          --------|      |--------
+       EZ-Link BT Ground [] Gnd              Vin []
+           EZ-Link BT Tx [] RX1             AGND []
+           EZ-Link BT Rx [] TX1             3.3V [] EZ-Link BT Vin
+                  -   +  [] 02                23 []
+EZ-Link BT Vin  --|1uF|--[] 03                22 []
+                         [] 04                21 []
+                         [] 05                20 []
+                         [] 06                19 []
+                         [] 07                18 []
+                         [] 08                17 []
+                         |  09                16 []
+                         [] 10                15 []
+                         [] 11                14 []
+                         [] 12                13 []
+    			               |                        |
+                          ------------------------
+ 
+
+ Power Supply
++
+-
+
+DRV2605 Breakout
+                    
                            
  -----------------------------------------------------------------------------------------       
 */
