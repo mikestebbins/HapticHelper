@@ -13,63 +13,74 @@ TODO's:
 
 ---------------------------- Pin Assignments -------------------------------------
                           
-                          Teensy 3.1 / 3.2
+Teensy 3.1 / 3.2
                                   |      |
                           --------|      |--------
-       EZ-Link BT Ground [] Gnd              Vin []
+        Power Supply (-) [] Gnd              Vin [] Power Supply (+)
            EZ-Link BT Tx [] RX1             AGND []
-           EZ-Link BT Rx [] TX1             3.3V [] EZ-Link BT Vin
-                  -   +  [] 02                23 []
-EZ-Link BT Vin  --|1uF|--[] 03                22 []
+           EZ-Link BT Rx [] TX1             3.3V [] DRV2605 VIN
+                         [] 02                23 []
+                         [] 03                22 []
                          [] 04                21 []
                          [] 05                20 []
-                         [] 06                19 []
-                         [] 07                18 []
+                         [] 06                19 [] DRV2605 SCL
+                         [] 07                18 [] DRV2605 SDA
                          [] 08                17 []
                          |  09                16 []
                          [] 10                15 []
                          [] 11                14 []
                          [] 12                13 []
-    			               |                        |
                           ------------------------
- 
+ ??? was connected to Arduino Uno Reset pin: EZ-Link BT Vin  --|1uF|--
 
+Adafruit EZ-Link Bluetooth Module
+                        -------------
+                        |        GND [] Power Supply (-)
+                        |        DSR [] Power Supply (-)
+                        |        Vin [] Power Supply (+)
+                        |        TX  [] Teensy RX1
+                        |        RX  [] Teensy TX1
+                        |        DTR [] unconnected?
+                         ------------
+    
  Power Supply
-+
--
+                        [] +
+                        [] -
 
 DRV2605 Breakout
-                    
-                           
+                        -------------
+                        |        VIN [] Teensy 3.3V
+                        |        GND [] Teensy GND
+                        |        SCL [] Teensy 19
+                        |        SDA [] Teensy 18
+                        |        IN  [] 
+                         ------------
+                                             
  -----------------------------------------------------------------------------------------       
 */
 
 #include <Wire.h>
 #include "Adafruit_DRV2605.h"
 
-const int ledPin = 13;           //  Arduino on-board LED pin, for testing purposes
+int ledPin = 13;           //  Arduino on-board LED pin, for testing purposes
 
-byte messageByte1;          // first byte of serial communication (holdover from old code)
+byte messageByte1;          // first byte of serial communication (holdover from previous messaging scheme)
 byte messageByte2;          // second byte of serial communication
 
-Adafruit_DRV2605 drv;
+byte effect = 1;
 
-uint8_t effect = 1;
+Adafruit_DRV2605 drv;
 
 //-------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------
 void setup() 
 {
-
   pinMode (ledPin, OUTPUT); 
   Serial.begin(9600);
-
-  Serial.println("DRV test");
   drv.begin();
-  
   drv.selectLibrary(1);
-  
+
   // I2C trigger by sending 'go' command 
   // default, internal trigger when sending GO command
   drv.setMode(DRV2605_MODE_INTTRIG); 
