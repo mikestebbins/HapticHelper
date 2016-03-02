@@ -134,6 +134,10 @@ void playTheWaveform(byte testByte, byte effect)
 {
   if (testByte == 255)
   {
+    if (effect == 118)          // 118 is a ~5second buzz, not useful and recks my cyclic demo
+    {
+      effect = 47;
+    }
     drv.setWaveform(0, effect);  // set the waveform
     drv.setWaveform(1, 0);      // end waveform
     drv.go();                   // play the effect!
