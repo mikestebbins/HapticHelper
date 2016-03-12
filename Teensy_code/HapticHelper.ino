@@ -8,8 +8,6 @@
  *
 
 TODO's:
-- update diagram of board and hookups
-- 
 
 ---------------------------- Pin Assignments -------------------------------------
                           
