@@ -40,22 +40,48 @@ Adafruit EZ-Link Bluetooth Module
                         |        Vin [] Power Supply (+)
                         |        TX  [] Teensy RX1
                         |        RX  [] Teensy TX1
-                        |        DTR [] unconnected?
+                        |        DTR [] unconnected
                          ------------
+
+DRV2605 Breakout
+                     ----------------
+        Teensy 3.3V [] VIN          [] 
+         Teensy GND [] GND  OUT (-) [] MOSFET terminal S
+          Teensy 19 [] SCL          [] 
+          Teensy 18 [] SDA  OUT (+) [] MOSFET terminal G & 10k pulldown to Gnd
+                    [] IN           [] 
+                     ----------------
     
- Power Supply
+FDS 6911 N-channel MOSFET
+                         ------------
+        DRV2605 out (-) [] S1    D1 [] Motor terminal A
+        DRV2605 out (+) [] G1    D1 [] 
+                        [] S2    D2 []
+                        [] G2    D2 []  
+                         ------------
+
+Motor (not polarized, doesn't matter which connection goes to which)
+        
+        terminal A [] MOSFET drain 1
+                         |
+                       -----
+                       |   |
+                       |   |
+                       -----  Back EMF protection diode (stripe toward V+)
+                       |   |
+                       -----
+                         |
+        terminal B [] 14V power supply (+)
+
+
+ Power Supply - 14V, 1A
                         [] +
                         [] -
 
-DRV2605 Breakout
-                        -------------
-                        |        VIN [] Teensy 3.3V
-                        |        GND [] Teensy GND
-                        |        SCL [] Teensy 19
-                        |        SDA [] Teensy 18
-                        |        IN  [] 
-                         ------------
-                                             
+ Linear Regulator 5V
+                        [] +
+                        [] -
+                                        
  -----------------------------------------------------------------------------------------       
 */
 
