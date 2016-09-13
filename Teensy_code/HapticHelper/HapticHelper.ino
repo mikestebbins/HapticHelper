@@ -40,14 +40,35 @@
                         + [] Teensy Vin
                         - [] Teensy GND
 
+  LM7805 voltage regulator
+                        -------------
+                      |        VIN [] Power Supply Rail 1 (+) (9V)
+                      |        GND [] Power Supply (-)
+                      |       VOUT [] Power Supply Rail 2 (+) (5V)
+                         ------------
+
   DRV2605 Breakout
                         -------------
                         |        VIN [] Power Supply (+)
                         |        GND [] Power Supply (-)
                         |        SCL [] Teensy 19
                         |        SDA [] Teensy 18
-                        |        IN  []
+                        |        IN  [] 
+                        |  MOTOR (+) []
+                        |  MOTOR (-) []
                          ------------
+
+FDS6911 N-channel MOSFET
+                          -------------
+GND +  DRV2605 MOTOR (-) [] S1     D1 [] to vibration motor terminal A
+       DRV2605 MOTOR (+) [] G1     D1 []
+                         [] S2     D2 [] 
+                         [] G2     D2 []
+                          -------------
+
+VIBRATION MOTOR
+                        A [] MOSFET D1
+                        B [] +9v POWER SUPPLY   (there is a flyback diode across these, stripe towards +9V)
 
   -----------------------------------------------------------------------------------------
 */
